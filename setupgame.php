@@ -10,7 +10,7 @@
 				How Many Players?:
 				<input type="number" name="numPlayers" min="1" max="8" name="numPlayers"><br/>
 				How Long Per Round?:<br/>
-				<select name="roundTime" name="roundTime">
+				<select name="roundTime">
 					<option value="120"> 2 mins </option>
 					<option value="135"> 2 mins 15 secs </option>
 					<option value="150"> 2 mins 30 secs </option>

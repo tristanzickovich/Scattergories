@@ -4,3 +4,9 @@ body{
 #mainlogo{
 	font-family: sans-serif;
 }
+#die{
+	font-size: 35px;
+}
+.hidden{
+	display: none;
+}

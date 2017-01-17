@@ -1,6 +1,5 @@
 <?php
-	if($_SERVER['REQUEST_METHOD'] = "POST") //Added an if to keep the page secured
-	{
+	if($_SERVER['REQUEST_METHOD'] == "POST"){
 		include 'connectdb.php'; //server connection code
 		$numPlayers = $_POST['numPlayers'];
 		$roundTime = $_POST['roundTime'];

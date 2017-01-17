@@ -10,11 +10,15 @@
 <html>
 	<head>
 		<title>Scattergories</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="./style.css">
 		<script type="text/javascript" src="general.js"></script>
 	</head>
 	<body>
 		<a href='Scattergories.html'>HOME</a>
+		<div id="rollButton">
+			<button onclick=" hideElement('rollButton'); rollDie(15)">ROLL DIE</button>
+		</div>
+		<div id="die"></div>
 		<div id="status"></div>
 		<script type="text/javascript"> countDown(<?php print $roundTime ?>,"status");</script>
 
