@@ -14,7 +14,7 @@
 		<script type="text/javascript" src="general.js"></script>
 	</head>
 	<body>
-		<a href='Scattergories.html'>HOME</a>
+		<a href='index.php'>HOME</a>
 		<div id="rollButton">
 			<button onclick=" hideElement('rollButton'); rollDie(15, 0)">ROLL DIE</button>
 		</div>
@@ -29,20 +29,8 @@
 		</div>
 		<div id="timeLeft"></div>
 		<?php
-			$listitems = array("","","","","","","","","","","","");
-			$ct = 0;
-
-			//read game list
-			$gamelist = fopen("list1.txt", "r") or die("Unable to open file.");
-
-			//load array with list
-			while(!feof($gamelist)){
-				$listitems[$ct] = fgets($gamelist);
-				++$ct;
-			}
-			//close file
-			fclose($gamelist);
-
+			include 'printlist.php';
+			$listitems = retrieveList(mt_rand(1, $numLists));
 		?>
 		
 		<div id="currentList" class = "hidden">

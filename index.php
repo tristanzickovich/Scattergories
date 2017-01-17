@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 	<head>
 		<title>Scattergories</title>
@@ -7,6 +6,7 @@
 	<body>
 		<h1 id="mainlogo">Scattergories</h1>
 		<div>
+			<a href='viewlists.php'>View Lists</a>
 			<a href='setupgame.php'>Setup Game</a>
 		</div>
 	</body>
