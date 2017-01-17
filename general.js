@@ -12,28 +12,32 @@ function countDown(secs, elem){
 	}
 }
 
-function rollDie(changes){
+function rollDie(changes, reroll){
 	var element = document.getElementById("die");
 	var letter = String.fromCharCode(65 + (Math.floor((Math.random() * 26))));
 	--changes;
 	if(changes > 10){
 		element.innerHTML = letter;
-		var timer = setTimeout('rollDie('+changes+')', 100);
+		var timer = setTimeout('rollDie('+changes+', '+reroll+')', 100);
 	}
 	else if(changes > 4){
 		element.innerHTML = letter;
-		var timer = setTimeout('rollDie('+changes+')', 200);
+		var timer = setTimeout('rollDie('+changes+', '+reroll+')', 200);
 	}
 	else if(changes > 1){
 		element.innerHTML = letter;
-		var timer = setTimeout('rollDie('+changes+')', 300);
+		var timer = setTimeout('rollDie('+changes+', '+reroll+')', 300);
 	}
 	else if(changes > 0){
 		element.innerHTML = letter;
-		var timer = setTimeout('rollDie('+changes+')', 400);
+		var timer = setTimeout('rollDie('+changes+', '+reroll+')', 400);
 	}
 	else{
 		element.innerHTML = '<strong>'+ letter + '</strong>';
+		if(reroll == 0)
+			revealElement("reroll");
+		else
+			revealElement("ready");
 	}
 
 }
@@ -41,4 +45,8 @@ function rollDie(changes){
 function hideElement(divID){
 	var item = document.getElementById(divID);
 	item.className = 'hidden';
+}
+function revealElement(divID){
+	var item = document.getElementById(divID);
+	item.className = 'revealed';
 }

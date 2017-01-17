@@ -16,12 +16,18 @@
 	<body>
 		<a href='Scattergories.html'>HOME</a>
 		<div id="rollButton">
-			<button onclick=" hideElement('rollButton'); rollDie(15)">ROLL DIE</button>
+			<button onclick=" hideElement('rollButton'); rollDie(15, 0)">ROLL DIE</button>
 		</div>
 		<div id="die"></div>
-		<div id="status"></div>
-		<script type="text/javascript"> countDown(<?php print $roundTime ?>,"status");</script>
-
+		<div id="reroll" class="hidden">
+			Reroll?<br/>
+			<button onClick="hideElement('reroll'); rollDie(15, 1)">Yes</button>
+			<button onClick="hideElement('reroll'); revealElement('ready')">No</button>
+		</div>
+		<div id="ready" class="hidden">
+			<button onClick="hideElement('ready'); revealElement('currentList'); countDown(<?php print $roundTime ?>,'timeLeft')">Begin!</button>
+		</div>
+		<div id="timeLeft"></div>
 		<?php
 			$listitems = array("","","","","","","","","","","","");
 			$ct = 0;
@@ -39,22 +45,24 @@
 
 		?>
 		
-		<table>
-			<tr>
-				<th></th>
-				<th>Item</th>
-				<th>Answer</th>
-			</tr>
-		<?php
-			for($i = 0; $i < 12; ++$i){
-				Print '<tr>';
-				Print '<td>' . ($i + 1) . '. </td>';
-				Print '<td>' . $listitems[$i] . '</td>';
-				Print '<td><input type="text"></td>';
-				Print '<tr>';
-			}
-		} //closing brace for top php segment
-		?>
-		</table>
+		<div id="currentList" class = "hidden">
+			<table>
+				<tr>
+					<th></th>
+					<th>Item</th>
+					<th>Answer</th>
+				</tr>
+			<?php
+				for($i = 0; $i < 12; ++$i){
+					Print '<tr>';
+					Print '<td>' . ($i + 1) . '. </td>';
+					Print '<td>' . $listitems[$i] . '</td>';
+					Print '<td><input type="text"></td>';
+					Print '<tr>';
+				}
+			} //closing brace for top php segment
+			?>
+			</table>
+		</div>
 	</body>
 </html>
