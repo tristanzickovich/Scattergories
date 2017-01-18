@@ -11,30 +11,31 @@
 	<head>
 		<title>Scattergories</title>
 		<link rel="stylesheet" type="text/css" href="./style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="general.js"></script>
 	</head>
 	<body>
 		<a href='index.php'>HOME</a>
+		<div id="die">?</div>
 		<div id="rollButton">
 			<button onclick=" hideElement('rollButton'); rollDie(15, 0)">ROLL DIE</button>
 		</div>
-		<div id="die"></div>
 		<div id="reroll" class="hidden">
 			Reroll?<br/>
 			<button onClick="hideElement('reroll'); rollDie(15, 1)">Yes</button>
 			<button onClick="hideElement('reroll'); revealElement('ready')">No</button>
 		</div>
 		<div id="ready" class="hidden">
-			<button onClick="hideElement('ready'); revealElement('currentList'); countDown(<?php print $roundTime ?>,'timeLeft')">Begin!</button>
+			<button onClick="hideElement('ready'); revealElement('currentList'); revealElement('timeLeft'); countDown(<?php print $roundTime ?>,'timeLeft')">Begin!</button>
 		</div>
-		<div id="timeLeft"></div>
+		<div id="timeLeft" class="hidden"></div>
 		<?php
 			include 'printlist.php';
 			$listitems = retrieveList(mt_rand(1, $numLists));
 		?>
 		
-		<div id="currentList" class = "hidden">
-			<table>
+		<div id="currentList" class="hidden">
+			<table id="listTable">
 				<tr>
 					<th></th>
 					<th>Item</th>

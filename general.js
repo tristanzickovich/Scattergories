@@ -50,3 +50,19 @@ function revealElement(divID){
 	var item = document.getElementById(divID);
 	item.className = 'revealed';
 }
+
+function keepCount() {
+	var NewCount = 0
+	for(var i = 0; i < 18; ++i){
+		var cur = "L" + i.toString();
+		if (document.gamesettings.cur.checked){
+			NewCount++;
+		}
+	}
+	if (NewCount >= 3)
+	{
+		alert('Pick Just Two Please')
+		document.gamesettings; return false;
+	}
+	
+}
