@@ -2,15 +2,17 @@
 	<head>
 		<title>Scattergories</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="general.js"></script>
 	</head>
 	<body>
 		<div>
-			<form name="gamesettings" action="creategame.php" method="POST" enctype="multipart/form-data">
+			<!--<form name="gamesettings" action="creategame.php" method="POST" enctype="multipart/form-data">-->
+			<form name="gamesettings">
 				How Many Players?:
-				<input type="number" name="numPlayers" min="1" max="8" name="numPlayers"><br/>
+				<input type="number" min="1" max="8" id="numPlayers" value="1"><br/>
 				How Long Per Round?:<br/>
-				<select name="roundTime">
+				<select id="roundTime">
 					<option value="120"> 2 mins </option>
 					<option value="135"> 2 mins 15 secs </option>
 					<option value="150"> 2 mins 30 secs </option>
@@ -18,17 +20,34 @@
 					<option value="180"> 3 mins </option>
 				</select>
 				<br/>Which Lists? (Select 3):
-				<input type="checkbox" name="L1" onClick="return keepCount()">1</input>
-				<input type="checkbox" name="L2" onClick="return keepCount()">2</input>
-				<input type="checkbox" name="L3" onClick="return keepCount()">3</input>
-				<input type="checkbox" name="L4" onClick="return keepCount()">4</input>
-				<input type="checkbox" name="L5" onClick="return keepCount()">5</input>
-				<input type="checkbox" name="L6" onClick="return keepCount()">6</input>
-				<input type="checkbox" name="L7" onClick="return keepCount()">7</input>
-				<input type="checkbox" name="L8" onClick="return keepCount()">8</input>
-				<input type="checkbox" name="L9" onClick="return keepCount()">9</input>
-				<input type="checkbox" name="L10" onClick="return keepCount()">10</input>
-				<br/><input type="submit" value="Begin">
+				<table id="listCheckbox">
+					<tr>
+						<td><input type="checkbox" id="L1">1</input></td>
+						<td><input type="checkbox" id="L2">2</input></td>
+						<td><input type="checkbox" id="L3">3</input></td>
+						<td><input type="checkbox" id="L4">4</input></td>
+						<td><input type="checkbox" id="L5">5</input></td>
+						<td><input type="checkbox" id="L6">6</input></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="L7">7</input></td>
+						<td><input type="checkbox" id="L8">8</input></td>
+						<td><input type="checkbox" id="L9">9</input></td>
+						<td><input type="checkbox" id="L10">10</input></td>
+						<td><input type="checkbox" id="L11">11</input></td>
+						<td><input type="checkbox" id="L12">12</input></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="L13">13</input></td>
+						<td><input type="checkbox" id="L14">14</input></td>
+						<td><input type="checkbox" id="L15">15</input></td>
+						<td><input type="checkbox" id="L16">16</input></td>
+						<td><input type="checkbox" id="L17">17</input></td>
+						<td><input type="checkbox" id="L18">18</input></td>
+					</tr>
+				</table>
+				<!--<br/><input type="submit" value="Begin">-->
+				<input type="button" value="Submit" onclick="validateSetup();">
 			</form>
 		</div>
 	</body>
