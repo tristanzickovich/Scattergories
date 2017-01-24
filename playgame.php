@@ -10,6 +10,8 @@
 		$list2 = $game['list2'];
 		$list3 = $game['list3'];
 		$currentRound = $game['currentRound'];
+
+		$letterRolled = 'A';
 ?>
 <html>
 	<head>
@@ -30,7 +32,7 @@
 			<button onClick="hideElement('reroll'); revealElement('ready')">No</button>
 		</div>
 		<div id="ready" class="hidden">
-			<button onClick="hideElement('ready'); revealElement('currentList'); revealElement('timeLeft'); countDown(<?php print $roundTime ?>,'timeLeft')">Begin!</button>
+			<button onClick="hideElement('ready'); revealElement('currentList'); revealElement('timeLeft'); setTime(<?php print $gid ?>)">Begin!</button>
 		</div>
 		<div id="timeLeft" class="hidden"></div>
 		<?php
