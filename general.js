@@ -52,6 +52,7 @@ function revealElement(divID){
 	item.className = 'revealed';
 }
 
+//
 function validateSetup(){
 	var listArray = new Array();
 	var roundTime = document.getElementById('roundTime').value;
@@ -65,6 +66,7 @@ function validateSetup(){
 		alert("Please select exactly 3 lists");
 	else{ //send data through form
 		var form = $('<form></form>');
+		form.attr("class", "hidden");
 		form.attr("method", "POST");
 		form.attr("action","creategame.php")
 		form.attr("enctype","multipart/form-data")
@@ -102,6 +104,14 @@ function validateSetup(){
 
 		//submit form
 		$(document.body).append(form);
-		form.submit();
+		$.ajax({
+		    type: 'POST',
+		    url: 'creategame.php',
+		    data: $('form').serialize(),
+		    success: function (data) {
+		      window.location.href = "playgame.php?gid=" + data;
+		    }
+		});
+
 	}
 }

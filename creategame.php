@@ -12,7 +12,7 @@
 		$query = mysqli_query($db, "SELECT MAX(gid) AS max FROM activegames");
 		$gid = mysqli_fetch_array($query,MYSQLI_ASSOC);
 		$gid = $gid['max'];
-		header("location: playgame.php?gid=".$gid);
+		echo $gid;
 		exit();
 	}
 	
