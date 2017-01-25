@@ -24,11 +24,11 @@
 		<a href='index.php'>HOME</a>
 		<div id="die">?</div>
 		<div id="rollButton">
-			<button onclick=" hideElement('rollButton'); rollDie(15, 0)">ROLL DIE</button>
+			<button onclick=" hideElement('rollButton'); rollDie(15, 0, <?php print $gid ?>)">ROLL DIE</button>
 		</div>
 		<div id="reroll" class="hidden">
 			Reroll?<br/>
-			<button onClick="hideElement('reroll'); rollDie(15, 1)">Yes</button>
+			<button onClick="hideElement('reroll'); rollDie(15, 1, <?php print $gid ?>)">Yes</button>
 			<button onClick="hideElement('reroll'); revealElement('ready')">No</button>
 		</div>
 		<div id="ready" class="hidden">

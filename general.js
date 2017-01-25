@@ -1,44 +1,66 @@
 var numLists = 18;
-function countDown(secs, elem){
-	var element = document.getElementById(elem);
-	element.innerHTML = "time remaining: " + secs + " seconds";
-	if(secs > 0){
-		--secs;
-		var timer = setTimeout('countDown('+secs+',"'+elem+'") ', 1000); //1 sec timer
-	}
-	else{
-		clearTimeout(timer);
-		element.innerHTML = '<h2> Round Over! </h2>';
-		element.innerHTML = '<a href="#"> click to continue </a>';
-	}
+function countDown(curgid){
+	$.ajax({
+		url: 'timeLeft.php',
+		type: 'post',
+		data: {gid : curgid},
+		success: function(secs){
+			var element = document.getElementById("timeLeft");
+			element.innerHTML = "time remaining: " + secs + " seconds";
+			if(secs > 0)
+				var timer = setTimeout('countDown('+curgid+') ', 300); //1 sec timer
+			else{
+				element.innerHTML = "Round Over";
+			}
+		}
+	})
 }
 
-function rollDie(changes, reroll){
+function setTime(curgid){
+	$.ajax({
+		url: 'setStartTime.php',
+		type: 'POST',
+		data: {gid : curgid},
+		success: function(){
+			countDown(curgid);
+		}
+	})
+}
+
+function rollDie(changes, reroll, curgid){
 	var element = document.getElementById("die");
 	var letter = String.fromCharCode(65 + (Math.floor((Math.random() * 26))));
 	--changes;
+	var rollRecurse = "rollDie(" + changes + ", " + reroll + ", " + curgid + ")";
 	if(changes > 10){
 		element.innerHTML = letter;
-		var timer = setTimeout('rollDie('+changes+', '+reroll+')', 100);
+		var timer = setTimeout(rollRecurse, 100);
 	}
 	else if(changes > 4){
 		element.innerHTML = letter;
-		var timer = setTimeout('rollDie('+changes+', '+reroll+')', 200);
+		var timer = setTimeout(rollRecurse, 200);
 	}
 	else if(changes > 1){
 		element.innerHTML = letter;
-		var timer = setTimeout('rollDie('+changes+', '+reroll+')', 300);
+		var timer = setTimeout(rollRecurse, 300);
 	}
 	else if(changes > 0){
 		element.innerHTML = letter;
-		var timer = setTimeout('rollDie('+changes+', '+reroll+')', 400);
+		var timer = setTimeout(rollRecurse, 400);
 	}
 	else{
-		element.innerHTML = '<strong>'+ letter + '</strong>';
-		if(reroll == 0)
-			revealElement("reroll");
-		else
-			revealElement("ready");
+		$.ajax({
+			url: 'setLetter.php',
+			type: 'POST',
+			data: {letter : letter, gid : curgid},
+			success: function(secs){
+				element.innerHTML = '<strong>'+ letter + '</strong>';
+				if(reroll == 0)
+					revealElement("reroll");
+				else
+					revealElement("ready");
+			}
+		})
 	}
 
 }

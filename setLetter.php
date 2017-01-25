@@ -1,9 +1,9 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
+		$letter = $_POST['letter'];
 		$gid = $_POST['gid'];
 		include 'connectdb.php'; //server connection code
-		$startTime = date('Y-m-d H:i:s');
-		mysqli_query($db,"UPDATE activegames SET roundStartTime='$startTime' WHERE gid='$gid'");
+		mysqli_query($db,"UPDATE activegames SET letterRolled='$letter' WHERE gid='$gid'");
 		exit();
 	}
 ?>

@@ -7,8 +7,9 @@
 		$list2 = $_POST['list2'];
 		$list3 = $_POST['list3'];
 		$currentRound = 1;
-		mysqli_query($db,"INSERT INTO activegames (roundTime, numPlayers, list1, list2, list3, currentRound) 
-							VALUES ('$roundTime','$numPlayers','$list1','$list2','$list3','$currentRound')");
+		$defaultLetter = 'A';
+		mysqli_query($db,"INSERT INTO activegames (roundTime, numPlayers, list1, list2, list3, currentRound, letterRolled) 
+							VALUES ('$roundTime','$numPlayers','$list1','$list2','$list3','$currentRound', '$defaultLetter')");
 		$query = mysqli_query($db, "SELECT MAX(gid) AS max FROM activegames");
 		$gid = mysqli_fetch_array($query,MYSQLI_ASSOC);
 		$gid = $gid['max'];
