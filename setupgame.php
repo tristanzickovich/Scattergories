@@ -1,3 +1,6 @@
+<?php
+	$gid = 0;
+?>
 <html>
 	<head>
 		<title>Scattergories</title>
@@ -6,8 +9,7 @@
 		<script type="text/javascript" src="general.js"></script>
 	</head>
 	<body>
-		<div>
-			<!--<form name="gamesettings" action="creategame.php" method="POST" enctype="multipart/form-data">-->
+		<div id="setupOptions">
 			<form name="gamesettings">
 				How Many Players?:
 				<input type="number" min="1" max="8" id="numPlayers" value="1"><br/>
@@ -46,9 +48,21 @@
 						<td><input type="checkbox" id="L18">18</input></td>
 					</tr>
 				</table>
-				<!--<br/><input type="submit" value="Begin">-->
 				<input type="button" value="Submit" onclick="validateSetup();">
 			</form>
 		</div>
+		<!--
+		<div id="die" class="hidden">?</div>
+		<div id="rollButton" class="hidden">
+			<button onclick=" hideElement('rollButton'); rollDie(15, 0, <?php print $gid ?>)">ROLL DIE</button>
+		</div>
+		<div id="reroll" class="hidden">
+			Reroll?<br/>
+			<button onClick="hideElement('reroll'); rollDie(15, 1, <?php print $gid ?>)">Yes</button>
+			<button onClick="hideElement('reroll'); revealElement('ready')">No</button>
+		</div>
+		<div id="ready" class="hidden">
+			<button onClick="hideElement('ready'); revealElement('currentList'); revealElement('timeLeft'); setTime(<?php print $gid ?>)">Begin!</button>
+		</div> -->
 	</body>
 </html>

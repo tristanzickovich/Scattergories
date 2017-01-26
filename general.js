@@ -8,7 +8,7 @@ function countDown(curgid){
 			var element = document.getElementById("timeLeft");
 			element.innerHTML = "time remaining: " + secs + " seconds";
 			if(secs > 0)
-				var timer = setTimeout('countDown('+curgid+') ', 300); //1 sec timer
+				var timer = setTimeout('countDown('+curgid+') ', 300);
 			else{
 				element.innerHTML = "Round Over";
 			}
@@ -90,8 +90,8 @@ function validateSetup(){
 		var form = $('<form></form>');
 		form.attr("class", "hidden");
 		form.attr("method", "POST");
-		form.attr("action","creategame.php")
-		form.attr("enctype","multipart/form-data")
+		form.attr("action","creategame.php");
+		form.attr("enctype","multipart/form-data");
 
 		//numPlayers
 		var field1 = $('<input></input>');
@@ -131,9 +131,109 @@ function validateSetup(){
 		    url: 'creategame.php',
 		    data: $('form').serialize(),
 		    success: function (data) {
+		    	/*hideElement('setupOptions');
+		    	revealElement('die');
+		    	revealElement('rollButton');*/
 		      window.location.href = "playgame.php?gid=" + data;
 		    }
 		});
 
 	}
+}
+
+function verifyInput(){
+	var username = document.getElementById('username').value;
+	var password = document.getElementById('password').value;
+	if(!username || !password){
+		alert("please enter a username and password");
+	}
+	else{
+		validateRegistration();
+	}
+}
+
+function validateRegistration(){
+	var username = document.getElementById('username').value;
+	var password = document.getElementById('password').value;
+	var form = $('<form></form>');
+	form.attr("class", "hidden");
+	form.attr("method", "POST");
+	form.attr("action","validateRegistration.php");
+	form.attr("enctype","multipart/form-data");
+	//username
+	var field1 = $('<input></input>');
+	field1.attr("type", "text");
+	field1.attr("name", "username");
+	field1.attr("value", username);
+	form.append(field1);
+	//password
+	var field2 = $('<input></input>');
+	field2.attr("type", "password");
+	field2.attr("name", "password");
+	field2.attr("value", password);
+	form.append(field2);
+	$(document.body).append(form);
+	$.ajax({
+	    type: 'POST',
+	    url: 'validateRegistration.php',
+	    data: $('form').serialize(),
+	    success: function (data) {
+	    	if(data == 0){ //username exists
+	    		var curdoc = document.getElementById("registerMessage");
+	    		curdoc.innerHTML = "Username already exists";
+	    	}
+	    	else{
+	    		hideElement('createAccount');
+	    		var curdoc = document.getElementById("registerMessage");
+	    		curdoc.innerHTML = "Success! Please log in.";
+	    	}
+	    }
+	});
+}
+
+function validateLogin(){
+	var username = document.getElementById('username1').value;
+	var password = document.getElementById('password1').value;
+	var form = $('<form></form>');
+	form.attr("class", "hidden");
+	form.attr("method", "POST");
+	form.attr("action","validateLogin.php");
+	form.attr("enctype","multipart/form-data");
+	//username
+	var field1 = $('<input></input>');
+	field1.attr("type", "text");
+	field1.attr("name", "username");
+	field1.attr("value", username);
+	form.append(field1);
+	//password
+	var field2 = $('<input></input>');
+	field2.attr("type", "password");
+	field2.attr("name", "password");
+	field2.attr("value", password);
+	form.append(field2);
+	$(document.body).append(form);
+
+	$.ajax({
+	    type: 'POST',
+	    url: 'validateLogin.php',
+	    data: $('form').serialize(),
+	    success: function (data) {
+	    	
+	    	if(data == 0){ //invalid login
+	    		var curdoc = document.getElementById("loginMessage");
+	    		curdoc.innerHTML = "Username or Password is incorrect. Please try again.";
+	    	}
+	    	else{
+	    		hideElement('login');
+	    		hideElement('preloginLinks');
+	    		var curdoc = document.getElementById("loginMessage");
+	    		curdoc.innerHTML = "Success! Please log in.";
+	    		curdoc = document.getElementById("postloginLinks");
+	    		curdoc.innerHTML = "<a href='#'>logout</a><br/> \
+	    							<a href='viewlists.php'>View Lists</a> \
+									<a href='setupgame.php'>Setup Game</a>";
+				
+	    	}
+	    }
+	});
 }
