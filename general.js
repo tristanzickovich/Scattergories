@@ -27,11 +27,11 @@ function setTime(curgid){
 	})
 }
 
-function rollDie(changes, reroll, curgid){
+function rollDie(changes, reroll, host){
 	var element = document.getElementById("die");
 	var letter = String.fromCharCode(65 + (Math.floor((Math.random() * 26))));
 	--changes;
-	var rollRecurse = "rollDie(" + changes + ", " + reroll + ", " + curgid + ")";
+	var rollRecurse = "rollDie(" + changes + ", " + reroll + ", " + host + ")";
 	if(changes > 10){
 		element.innerHTML = letter;
 		var timer = setTimeout(rollRecurse, 100);
@@ -52,8 +52,8 @@ function rollDie(changes, reroll, curgid){
 		$.ajax({
 			url: 'setLetter.php',
 			type: 'POST',
-			data: {letter : letter, gid : curgid},
-			success: function(secs){
+			data: {letter : letter, host : host},
+			success: function(){
 				element.innerHTML = '<strong>'+ letter + '</strong>';
 				if(reroll == 0)
 					revealElement("reroll");
@@ -62,7 +62,6 @@ function rollDie(changes, reroll, curgid){
 			}
 		})
 	}
-
 }
 
 function hideElement(divID){
@@ -75,7 +74,7 @@ function revealElement(divID){
 }
 
 //
-function validateSetup(){
+function validateSetup(host){
 	var listArray = new Array();
 	var roundTime = document.getElementById('roundTime').value;
 	var numPlayers = document.getElementById('numPlayers').value;
@@ -123,6 +122,12 @@ function validateSetup(){
 		field5.attr("name", "list3");
 		field5.attr("value", listArray[2]);
 		form.append(field5);
+		//host
+		var field6 = $('<input></input>');
+		field6.attr("type", "text");
+		field6.attr("name", "host");
+		field6.attr("value", host);
+		form.append(field6);
 
 		//submit form
 		$(document.body).append(form);
@@ -131,13 +136,12 @@ function validateSetup(){
 		    url: 'creategame.php',
 		    data: $('form').serialize(),
 		    success: function (data) {
-		    	/*hideElement('setupOptions');
+		    	hideElement('setupOptions');
 		    	revealElement('die');
-		    	revealElement('rollButton');*/
-		      window.location.href = "playgame.php?gid=" + data;
+		    	revealElement('rollButton');
+		      //window.location.href = "playgame.php?gid=" + data;
 		    }
 		});
-
 	}
 }
 
@@ -183,9 +187,7 @@ function validateRegistration(){
 	    		curdoc.innerHTML = "Username already exists";
 	    	}
 	    	else{
-	    		hideElement('createAccount');
-	    		var curdoc = document.getElementById("registerMessage");
-	    		curdoc.innerHTML = "Success! Please log in.";
+	    		window.location.href = "home.php";
 	    	}
 	    }
 	});
@@ -218,21 +220,12 @@ function validateLogin(){
 	    url: 'validateLogin.php',
 	    data: $('form').serialize(),
 	    success: function (data) {
-	    	
 	    	if(data == 0){ //invalid login
 	    		var curdoc = document.getElementById("loginMessage");
 	    		curdoc.innerHTML = "Username or Password is incorrect. Please try again.";
 	    	}
 	    	else{
-	    		hideElement('login');
-	    		hideElement('preloginLinks');
-	    		var curdoc = document.getElementById("loginMessage");
-	    		curdoc.innerHTML = "Success! Please log in.";
-	    		curdoc = document.getElementById("postloginLinks");
-	    		curdoc.innerHTML = "<a href='#'>logout</a><br/> \
-	    							<a href='viewlists.php'>View Lists</a> \
-									<a href='setupgame.php'>Setup Game</a>";
-				
+				window.location.href = "home.php";
 	    	}
 	    }
 	});

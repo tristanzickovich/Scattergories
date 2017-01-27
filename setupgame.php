@@ -1,5 +1,5 @@
 <?php
-	$gid = 0;
+	include 'sessionStart.php';
 ?>
 <html>
 	<head>
@@ -48,21 +48,20 @@
 						<td><input type="checkbox" id="L18">18</input></td>
 					</tr>
 				</table>
-				<input type="button" value="Submit" onclick="validateSetup();">
+				<input type="button" value="Submit" onclick="validateSetup('<?php print $user; ?>');">
 			</form>
 		</div>
-		<!--
 		<div id="die" class="hidden">?</div>
 		<div id="rollButton" class="hidden">
-			<button onclick=" hideElement('rollButton'); rollDie(15, 0, <?php print $gid ?>)">ROLL DIE</button>
+			<button onclick=" hideElement('rollButton'); rollDie(15, 0, '<?php print $user; ?>')">ROLL DIE</button>
 		</div>
 		<div id="reroll" class="hidden">
 			Reroll?<br/>
-			<button onClick="hideElement('reroll'); rollDie(15, 1, <?php print $gid ?>)">Yes</button>
+			<button onClick="hideElement('reroll'); rollDie(15, 1, '<?php print $user; ?>')">Yes</button>
 			<button onClick="hideElement('reroll'); revealElement('ready')">No</button>
 		</div>
 		<div id="ready" class="hidden">
-			<button onClick="hideElement('ready'); revealElement('currentList'); revealElement('timeLeft'); setTime(<?php print $gid ?>)">Begin!</button>
-		</div> -->
+			<button onClick="hideElement('ready')">Begin!</button>
+		</div>
 	</body>
 </html>

@@ -10,8 +10,8 @@
 		<div id="postloginLinks">
 		</div>
 		<div id="preloginLinks">
-			<a href="javascript:void(0)" onclick="revealElement('login')">login</a>
-			<a href="javascript:void(0)" onclick="revealElement('createAccount')">create account</a>
+			<a href="javascript:void(0)" onclick="revealElement('login'); hideElement('createAccount')";>login</a>
+			<a href="javascript:void(0)" onclick="revealElement('createAccount'); hideElement('login');">create account</a>
 		</div>
 		<div id="login" class="hidden">
 			<form>

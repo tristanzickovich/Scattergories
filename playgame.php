@@ -1,4 +1,5 @@
 <?php
+	include 'sessionStart.php';
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
 		$gid = $_GET['gid'];
 		include 'connectdb.php';
@@ -21,19 +22,6 @@
 		<script type="text/javascript" src="general.js"></script>
 	</head>
 	<body>
-		<a href='index.php'>HOME</a>
-		<div id="die">?</div>
-		<div id="rollButton">
-			<button onclick=" hideElement('rollButton'); rollDie(15, 0, <?php print $gid ?>)">ROLL DIE</button>
-		</div>
-		<div id="reroll" class="hidden">
-			Reroll?<br/>
-			<button onClick="hideElement('reroll'); rollDie(15, 1, <?php print $gid ?>)">Yes</button>
-			<button onClick="hideElement('reroll'); revealElement('ready')">No</button>
-		</div>
-		<div id="ready" class="hidden">
-			<button onClick="hideElement('ready'); revealElement('currentList'); revealElement('timeLeft'); setTime(<?php print $gid ?>)">Begin!</button>
-		</div>
 		<div id="timeLeft" class="hidden"></div>
 		<?php
 			include 'printlist.php';

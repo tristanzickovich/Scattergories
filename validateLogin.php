@@ -1,5 +1,6 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
+		session_start();
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		include 'connectdb.php'; //server connection code
@@ -10,8 +11,9 @@
 			echo 1;
 			exit();
 		}
-
-		echo 0;
-		exit();
+		else{
+			echo 0;
+			exit();
+		}
 	}
 ?>
