@@ -11,8 +11,6 @@
 		$list2 = $game['list2'];
 		$list3 = $game['list3'];
 		$currentRound = $game['currentRound'];
-
-		$letterRolled = 'A';
 ?>
 <html>
 	<head>
@@ -21,20 +19,25 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="general.js"></script>
 	</head>
-	<body>
+	<body onload="setTime(<?php echo $gid; ?>); revealElement('timeLeft'); revealElement('currentList');">
 		<div id="timeLeft" class="hidden"></div>
 		<?php
 			include 'printlist.php';
+			$curList = 0;
 			if($currentRound == 1)
-				$listitems = retrieveList($list1);
+				$curList = $list1;
 			else if($currentRound == 2)
-				$listitems = retrieveList($list2);
+				$curList = $list2;
 			else if($currentRound == 3)
-				$listitems = retrieveList($list3);
+				$curList = $list3;
+			$listitems = retrieveList($curList);
 		?>
 		
 		<div id="currentList" class="hidden">
 			<table id="listTable">
+				<tr>
+					<th> List <?php echo $curList; ?> </th>
+				</tr>
 				<tr>
 					<th></th>
 					<th>Item</th>

@@ -31,7 +31,7 @@ function rollDie(changes, reroll, host){
 	var element = document.getElementById("die");
 	var letter = String.fromCharCode(65 + (Math.floor((Math.random() * 26))));
 	--changes;
-	var rollRecurse = "rollDie(" + changes + ", " + reroll + ", " + host + ")";
+	var rollRecurse = "rollDie(" + changes + ", " + reroll + ", '" + host + "')";
 	if(changes > 10){
 		element.innerHTML = letter;
 		var timer = setTimeout(rollRecurse, 100);
@@ -53,7 +53,7 @@ function rollDie(changes, reroll, host){
 			url: 'setLetter.php',
 			type: 'POST',
 			data: {letter : letter, host : host},
-			success: function(){
+			success: function(data){
 				element.innerHTML = '<strong>'+ letter + '</strong>';
 				if(reroll == 0)
 					revealElement("reroll");
@@ -227,6 +227,28 @@ function validateLogin(){
 	    	else{
 				window.location.href = "home.php";
 	    	}
+	    }
+	});
+}
+
+function enterLobby(host){
+	var form = $('<form></form>');
+	form.attr("class", "hidden");
+	form.attr("method", "GET");
+	form.attr("action","getGID.php");
+
+	var field1 = $('<input></input>');
+	field1.attr("type", "text");
+	field1.attr("name", "host");
+	field1.attr("value", host);
+	form.append(field1);
+	$(document.body).append(form);
+	$.ajax({
+	    type: 'GET',
+	    url: 'getGID.php',
+	    data: $('form').serialize(),
+	    success: function (data) {
+	    	window.location.href = "playgame.php?gid="+data;
 	    }
 	});
 }

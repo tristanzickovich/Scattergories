@@ -53,15 +53,15 @@
 		</div>
 		<div id="die" class="hidden">?</div>
 		<div id="rollButton" class="hidden">
-			<button onclick=" hideElement('rollButton'); rollDie(15, 0, '<?php print $user; ?>')">ROLL DIE</button>
+			<button onclick=" hideElement('rollButton'); rollDie(15, 0, '<?php print $user; ?>');">ROLL DIE</button>
 		</div>
 		<div id="reroll" class="hidden">
 			Reroll?<br/>
-			<button onClick="hideElement('reroll'); rollDie(15, 1, '<?php print $user; ?>')">Yes</button>
-			<button onClick="hideElement('reroll'); revealElement('ready')">No</button>
+			<button onClick="hideElement('reroll'); rollDie(15, 1, '<?php print $user; ?>');">Yes</button>
+			<button onClick="hideElement('reroll'); revealElement('enterLobby')">No</button>
 		</div>
-		<div id="ready" class="hidden">
-			<button onClick="hideElement('ready')">Begin!</button>
+		<div id="enterLobby" class="hidden">
+			<button onClick="enterLobby('<?php print $user; ?>')">Enter Lobby!</button>
 		</div>
 	</body>
 </html>
