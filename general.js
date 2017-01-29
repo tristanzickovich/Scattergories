@@ -11,9 +11,20 @@ function countDown(curgid){
 				var timer = setTimeout('countDown('+curgid+') ', 300);
 			else{
 				element.innerHTML = "Round Over";
+				roundsAnswers();
 			}
 		}
 	})
+}
+
+function roundsAnswers(){
+	var answerSet = document.getElementsByClassName('roundAnswers');
+	for(var i = 11; i >= 0; --i){
+		var curitem = answerSet[i].value;
+		var curloc = "ans" + i;
+		curloc = document.getElementById(curloc);
+		curloc.innerHTML = curitem;
+	}
 }
 
 function setTime(curgid){

@@ -48,7 +48,7 @@
 					Print '<tr>';
 					Print '<td>' . ($i + 1) . '. </td>';
 					Print '<td>' . $listitems[$i] . '</td>';
-					Print '<td><input type="text"></td>';
+					Print '<td id="ans'.$i.'"><input type="text" class="roundAnswers"></td>';
 					Print '<tr>';
 				}
 			} //closing brace for top php segment

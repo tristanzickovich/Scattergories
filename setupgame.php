@@ -15,7 +15,7 @@
 				<input type="number" min="1" max="8" id="numPlayers" value="1"><br/>
 				How Long Per Round?:<br/>
 				<select id="roundTime">
-					<option value="120"> 2 mins </option>
+					<option value="12"> 2 mins </option>
 					<option value="135"> 2 mins 15 secs </option>
 					<option value="150"> 2 mins 30 secs </option>
 					<option value="165"> 2 mins 45 secs </option>
