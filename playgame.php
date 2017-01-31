@@ -1,5 +1,6 @@
 <?php
 	include 'sessionStart.php';
+	$player = $user;
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
 		$gid = $_GET['gid'];
 		include 'connectdb.php';
@@ -54,6 +55,22 @@
 			} //closing brace for top php segment
 			?>
 			</table>
+		</div>
+		<div id="roundsScore" class="hidden">
+			<input type="text" id="curRoundScore">
+			<input type="button" value="Send Score" onclick="updateScore(<?php echo $currentRound; ?>, '<?php echo $player; ?>')">
+		</div>
+		<div id="die" class="hidden">?</div>
+		<div id="rollButton" class="hidden">
+			<button onclick=" hideElement('rollButton'); rollDie(15, 0, '<?php print $user; ?>');">ROLL DIE</button>
+		</div>
+		<div id="reroll" class="hidden">
+			Reroll?<br/>
+			<button onClick="hideElement('reroll'); rollDie(15, 1, '<?php print $user; ?>');">Yes</button>
+			<button onClick="hideElement('reroll'); revealElement('enterLobby')">No</button>
+		</div>
+		<div id="enterLobby" class="hidden">
+			<button onClick="nextRound(<?php print $currentRound; ?>,'<?php print $player; ?>')">Next Round!</button>
 		</div>
 	</body>
 </html>

@@ -11,6 +11,7 @@ function countDown(curgid){
 				var timer = setTimeout('countDown('+curgid+') ', 300);
 			else{
 				element.innerHTML = "Round Over";
+				revealElement("roundsScore");
 				roundsAnswers();
 			}
 		}
@@ -69,7 +70,7 @@ function rollDie(changes, reroll, host){
 				if(reroll == 0)
 					revealElement("reroll");
 				else
-					revealElement("ready");
+					revealElement("enterLobby");
 			}
 		})
 	}
@@ -150,7 +151,6 @@ function validateSetup(host){
 		    	hideElement('setupOptions');
 		    	revealElement('die');
 		    	revealElement('rollButton');
-		      //window.location.href = "playgame.php?gid=" + data;
 		    }
 		});
 	}
@@ -262,4 +262,40 @@ function enterLobby(host){
 	    	window.location.href = "playgame.php?gid="+data;
 	    }
 	});
+}
+
+function updateScore(round, player){
+	var score = document.getElementById('curRoundScore').value;
+	$.ajax({
+		url: 'setRoundScore.php',
+		type: 'POST',
+		data: {round : round, player : player, score : score},
+		success: function(){
+			hideElement("roundsScore");
+			if(round < 3){
+				revealElement("die");
+				revealElement("rollButton");
+			}
+			else{
+				nextRound(round, player);
+			}
+		}
+	})
+}
+
+function nextRound(round, host){
+	var score = document.getElementById('curRoundScore').value;
+	$.ajax({
+		url: 'nextRound.php',
+		type: 'GET',
+		data: {round : round, host : host},
+		success: function(data){
+			if(data == 0){
+				enterLobby(host);
+			}
+			else{
+				alert("game over");
+			}
+		}
+	})
 }
