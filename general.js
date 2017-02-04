@@ -148,9 +148,7 @@ function validateSetup(host){
 		    url: 'creategame.php',
 		    data: $('form').serialize(),
 		    success: function (data) {
-		    	hideElement('setupOptions');
-		    	revealElement('die');
-		    	revealElement('rollButton');
+		    	window.location.href = "waitLobby.php?gid=" + data;
 		    }
 		});
 	}
@@ -272,26 +270,18 @@ function updateScore(round, player){
 		data: {round : round, player : player, score : score},
 		success: function(){
 			hideElement("roundsScore");
-			if(round < 3){
-				revealElement("die");
-				revealElement("rollButton");
-			}
-			else{
-				nextRound(round, player);
-			}
 		}
 	})
 }
 
-function nextRound(round, host){
-	var score = document.getElementById('curRoundScore').value;
+function nextRound(round, host, gid){
 	$.ajax({
 		url: 'nextRound.php',
 		type: 'GET',
 		data: {round : round, host : host},
 		success: function(data){
 			if(data == 0){
-				enterLobby(host);
+				window.location.href = "waitLobby.php?gid=" + gid;
 			}
 			else{
 				alert("game over");
