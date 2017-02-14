@@ -2,7 +2,7 @@ var numLists = 18;
 function countDown(curgid){
 	$.ajax({
 		url: 'timeLeft.php',
-		type: 'post',
+		type: 'POST',
 		data: {gid : curgid},
 		success: function(secs){
 			var element = document.getElementById("timeLeft");
@@ -80,16 +80,50 @@ function hideElement(divID){
 	var item = document.getElementById(divID);
 	item.className = 'hidden';
 }
+
 function revealElement(divID){
 	var item = document.getElementById(divID);
 	item.className = 'revealed';
 }
 
-//
+function lobbyPlayers(gid){
+	$.ajax({
+		url: 'getPlayers',
+		type: 'GET',
+		data: {gid : gid},
+		success: function(list){
+			people = JSON.parse(list);
+			var element = document.getElementById("lobbyPlayers");
+			element.innerHTML = "Players in Lobby: <br/>";
+			for(var i = 0; i < people.length; ++i){
+				element.innerHTML += (people[i] + "<br/>");
+			}
+			var timer = setTimeout('lobbyPlayers('+gid+') ', 500);
+		}
+	})
+}
+
+function validateJoinGame(){
+	var host = document.getElementById('gamehost').value;
+	if(!host)
+		alert("Please Enter Host Name");
+	else{
+		$.ajax({
+		    type: 'GET',
+		    url: 'checkJoinableGame.php',
+		    data: {host : host},
+		    success: function (data) {
+		    	if(data >= 0)
+		    		window.location.href = "waitLobby.php?gid=" + data;
+		    	else
+		    		alert('no game hosted by "'+host+'"');
+		    }
+		});
+	}
+}
 function validateSetup(host){
 	var listArray = new Array();
 	var roundTime = document.getElementById('roundTime').value;
-	var numPlayers = document.getElementById('numPlayers').value;
 	for(var i = 0; i < numLists; ++i){
 		var tmpid = "L" + (i+1);
 		if(document.getElementById(tmpid).checked)
@@ -104,42 +138,36 @@ function validateSetup(host){
 		form.attr("action","creategame.php");
 		form.attr("enctype","multipart/form-data");
 
-		//numPlayers
+		//roundTime
 		var field1 = $('<input></input>');
 		field1.attr("type", "number");
-		field1.attr("name", "numPlayers");
-		field1.attr("value", numPlayers);
+		field1.attr("name", "roundTime");
+		field1.attr("value", roundTime);
 		form.append(field1);
-		//roundTime
+		//list1
 		var field2 = $('<input></input>');
 		field2.attr("type", "number");
-		field2.attr("name", "roundTime");
-		field2.attr("value", roundTime);
+		field2.attr("name", "list1");
+		field2.attr("value", listArray[0]);
 		form.append(field2);
-		//list1
+		//list2
 		var field3 = $('<input></input>');
 		field3.attr("type", "number");
-		field3.attr("name", "list1");
-		field3.attr("value", listArray[0]);
+		field3.attr("name", "list2");
+		field3.attr("value", listArray[1]);
 		form.append(field3);
-		//list2
+		//list3
 		var field4 = $('<input></input>');
 		field4.attr("type", "number");
-		field4.attr("name", "list2");
-		field4.attr("value", listArray[1]);
+		field4.attr("name", "list3");
+		field4.attr("value", listArray[2]);
 		form.append(field4);
-		//list3
-		var field5 = $('<input></input>');
-		field5.attr("type", "number");
-		field5.attr("name", "list3");
-		field5.attr("value", listArray[2]);
-		form.append(field5);
 		//host
-		var field6 = $('<input></input>');
-		field6.attr("type", "text");
-		field6.attr("name", "host");
-		field6.attr("value", host);
-		form.append(field6);
+		var field5 = $('<input></input>');
+		field5.attr("type", "text");
+		field5.attr("name", "host");
+		field5.attr("value", host);
+		form.append(field5);
 
 		//submit form
 		$(document.body).append(form);

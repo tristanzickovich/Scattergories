@@ -9,11 +9,9 @@
 		<script type="text/javascript" src="general.js"></script>
 	</head>
 	<body>
-		<h1 id="mainlogo">Scattergories</h1>
-		<?php print $user; ?>
-		<a href='logout.php'>logout</a><br/>
-	   	<a href='viewlists.php'>View Lists</a>
-		<a href='setupgame.php'>Setup Game</a>
-		<a href='joinGame.php'>Join Game</a>
+		<a href="home.php">home</a> <br/>
+		Enter username of game host: 
+		<input type="text" id="gamehost"></input>
+		<input type="button" value="Join Game" onclick="validateJoinGame();">
 	</body>
 </html>

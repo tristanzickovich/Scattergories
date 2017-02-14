@@ -9,10 +9,9 @@
 		<script type="text/javascript" src="general.js"></script>
 	</head>
 	<body>
+		<a href="home.php">home</a> <br/>
 		<div id="setupOptions">
 			<form name="gamesettings">
-				How Many Players?:
-				<input type="number" min="1" max="8" id="numPlayers" value="1"><br/>
 				How Long Per Round?:<br/>
 				<select id="roundTime">
 					<option value="12"> 2 mins </option>

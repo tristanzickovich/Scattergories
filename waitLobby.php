@@ -1,6 +1,7 @@
 <?php
 	include 'sessionStart.php';
 	$player = $user;
+	$gid = $_GET['gid'];
 ?>
 <html>
 	<head>
@@ -9,8 +10,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="general.js"></script>
 	</head>
-	<body>
+	<body onload="lobbyPlayers(<?php echo $gid; ?>);">
 		<h1>Lobby</h1>
+		<div id="lobbyPlayers"></div>
 		<div id="die">?</div>
 		<div id="rollButton">
 			<button onclick=" hideElement('rollButton'); rollDie(15, 0, '<?php print $player; ?>');">ROLL DIE</button>
