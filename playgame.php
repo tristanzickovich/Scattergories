@@ -7,11 +7,12 @@
 		$query = mysqli_query($db, "SELECT * FROM activegames WHERE gid='$gid'");
 		$game = mysqli_fetch_array($query,MYSQLI_ASSOC);
 		$roundTime = $game['roundTime'];
-		$numPlayers = $game['numPlayers'];
 		$list1 = $game['list1'];
 		$list2 = $game['list2'];
 		$list3 = $game['list3'];
 		$currentRound = $game['currentRound'];
+		$letter = $game['letterRolled'];
+		$host = $game['host'];
 ?>
 <html>
 	<head>
@@ -20,9 +21,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="general.js"></script>
 	</head>
-	<body onload="setTime(<?php echo $gid; ?>); revealElement('timeLeft'); revealElement('currentList');">
+	<body onload="setTime(<?php echo $gid; ?>); revealElement('timeLeft'); revealElement('currentList'); playersReady(<?php echo $gid ?>, <?php echo $currentRound ?>);">
 		<div id="timeLeft" class="hidden"></div>
 		<?php
+			print "Letter: " . $letter . "\n";
 			include 'printlist.php';
 			$curList = 0;
 			if($currentRound == 1)
@@ -61,7 +63,7 @@
 			<input type="button" value="Send Score" onclick="updateScore(<?php echo $currentRound; ?>, '<?php echo $player; ?>'); revealElement('nextRound');">
 		</div>
 		<div id="nextRound" class="hidden">
-			<input type="button" value="Next Round" onclick="nextRound(<?php echo $currentRound; ?>, '<?php echo $player; ?>', <?php echo $gid; ?> )">
+			<p>Waiting for all players to submit their scores</p>
 		</div>
 	</body>
 </html>

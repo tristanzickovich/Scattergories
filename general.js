@@ -39,6 +39,23 @@ function setTime(curgid){
 	})
 }
 
+function playersReady(curgid, curround){
+	$.ajax({
+		url: 'playersReady.php',
+		type: 'GET',
+		data: {gid : curgid},
+		success: function(data){
+			var elem = document.getElementById('nextRound');
+			if(data > 0){
+				nextRound(curround, curgid);
+			}
+			else{
+				var timer = setTimeout('playersReady('+curgid+', '+curround+') ', 300);
+			}
+		}
+	})
+}
+
 function rollDie(changes, reroll, host){
 	var element = document.getElementById("die");
 	var letter = String.fromCharCode(65 + (Math.floor((Math.random() * 26))));
@@ -267,25 +284,28 @@ function validateLogin(){
 	    }
 	});
 }
+function startRound(gid){
+	$.ajax({
+	    type: 'POST',
+	    url: 'startRound.php',
+	    data: {gid : gid},
+	    success: function (data) {
+	    	
+	    }
+	});
+}
 
-function enterLobby(host){
-	var form = $('<form></form>');
-	form.attr("class", "hidden");
-	form.attr("method", "GET");
-	form.attr("action","getGID.php");
-
-	var field1 = $('<input></input>');
-	field1.attr("type", "text");
-	field1.attr("name", "host");
-	field1.attr("value", host);
-	form.append(field1);
-	$(document.body).append(form);
+function enterLobby(gid){
 	$.ajax({
 	    type: 'GET',
-	    url: 'getGID.php',
-	    data: $('form').serialize(),
+	    url: 'roundReady.php',
+	    data: {gid : gid},
 	    success: function (data) {
-	    	window.location.href = "playgame.php?gid="+data;
+	    	if(data > 0)
+	    		window.location.href = "playgame.php?gid="+gid;
+	    	else{
+				var timer = setTimeout('enterLobby('+gid+') ', 300);
+			}
 	    }
 	});
 }
@@ -302,11 +322,11 @@ function updateScore(round, player){
 	})
 }
 
-function nextRound(round, host, gid){
+function nextRound(round, gid){
 	$.ajax({
 		url: 'nextRound.php',
 		type: 'GET',
-		data: {round : round, host : host},
+		data: {round : round, gid : gid},
 		success: function(data){
 			if(data == 0){
 				window.location.href = "waitLobby.php?gid=" + gid;
