@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(isset($_SESSION['user'])){ //user already logged in
+		header("location:home.php");
+		exit();
+	}
+?>
 <html>
 	<head>
 		<title>Scattergories</title>

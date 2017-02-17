@@ -132,6 +132,8 @@ function validateJoinGame(){
 		    success: function (data) {
 		    	if(data >= 0)
 		    		window.location.href = "waitLobby.php?gid=" + data;
+		    	else if(data == (-1))
+		    		alert('game already in progress');
 		    	else
 		    		alert('no game hosted by "'+host+'"');
 		    }
