@@ -334,7 +334,7 @@ function nextRound(round, gid){
 				window.location.href = "waitLobby.php?gid=" + gid;
 			}
 			else{
-				alert("game over");
+				window.location.href = "gameover.php?gid=" + gid;
 			}
 		}
 	})

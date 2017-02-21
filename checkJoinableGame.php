@@ -16,6 +16,7 @@
 			}
 			if($round == 1){
 				mysqli_query($db,"INSERT INTO gameplayers (gid, player) VALUES ('$gid','$player')");
+				mysqli_query($db,"INSERT INTO gamescores (gid, player) VALUES ('$gid','$player')");
 				echo $gid;
 				exit();
 			}

@@ -16,6 +16,7 @@
 		$query = mysqli_query($db, "SELECT gid FROM activegames WHERE host='$host'");
 		$gid = mysqli_fetch_array($query,MYSQLI_ASSOC)['gid'];
 		mysqli_query($db,"INSERT INTO gameplayers (gid, player) VALUES ('$gid','$player')");
+		mysqli_query($db,"INSERT INTO gamescores (gid, player) VALUES ('$gid','$player')");
 		echo $gid;
 		exit();
 	}

@@ -5,7 +5,8 @@
 		$player = $_POST['player'];
 		$status = 1;
 		include 'connectdb.php'; //server connection code
-		mysqli_query($db,"UPDATE gameplayers SET scoreR".$round."='$score', roundReady='$status' WHERE player='$player'");
+		mysqli_query($db,"UPDATE gameplayers SET roundReady='$status' WHERE player='$player'");
+		mysqli_query($db,"UPDATE gamescores SET s".$round."='$score' WHERE player='$player'");
 		exit();
 	}
 ?>
