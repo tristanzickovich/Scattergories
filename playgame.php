@@ -5,6 +5,10 @@
 		$gid = $_GET['gid'];
 		include 'connectdb.php';
 		$query = mysqli_query($db, "SELECT * FROM activegames WHERE gid='$gid'");
+		if(mysqli_num_rows($query) < 1){
+			header("location:home.php");
+			exit();
+		}
 		$game = mysqli_fetch_array($query,MYSQLI_ASSOC);
 		$roundTime = $game['roundTime'];
 		$list1 = $game['list1'];

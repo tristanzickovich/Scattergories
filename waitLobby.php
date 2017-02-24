@@ -10,6 +10,10 @@
 			$host = $row['host'];
 		}
 	}
+	else{
+		header("location:home.php");
+		exit();
+	}
 ?>
 <html>
 	<head>

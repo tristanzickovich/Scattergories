@@ -6,4 +6,8 @@
 		mysqli_query($db,"UPDATE activegames SET roundStartTime='$startTime' WHERE gid='$gid'");
 		exit();
 	}
+	else{
+		header("location:home.php");
+		exit();
+	}
 ?>

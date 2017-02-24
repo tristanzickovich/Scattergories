@@ -1,3 +1,6 @@
+<?php
+	include 'sessionStart.php';
+?>
 <html>
 	<head>
 		<title>Scattergories</title>
@@ -5,6 +8,7 @@
 	</head>
 	<body>
 <?php
+	define('myConst', TRUE);
 	include 'printlist.php';
 	for($i = 0; $i < $numLists; ++$i){
 		$listitems = retrieveList($i + 1);

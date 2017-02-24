@@ -13,4 +13,8 @@
 		}
 		echo json_encode($playerArr);
 	}
+	else{
+		header("location:home.php");
+		exit();
+	}
 ?>

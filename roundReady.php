@@ -14,4 +14,8 @@
 		echo 1;
 		exit();
 	}
+	else{
+		header("location:home.php");
+		exit();
+	}
 ?>

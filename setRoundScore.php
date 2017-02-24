@@ -9,4 +9,8 @@
 		mysqli_query($db,"UPDATE gamescores SET s".$round."='$score' WHERE player='$player'");
 		exit();
 	}
+	else{
+		header("location:home.php");
+		exit();
+	}
 ?>

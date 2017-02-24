@@ -14,4 +14,8 @@
 		echo $roundTime-(strtotime($curTime) - strtotime($startTime));
 		exit();
 	}
+	else{
+		header("location:home.php");
+		exit();
+	}
 ?>

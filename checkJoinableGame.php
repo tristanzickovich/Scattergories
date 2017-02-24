@@ -30,4 +30,8 @@
 			exit();
 		}
 	}
+	else{
+		header("location:home.php");
+		exit();
+	}
 ?>

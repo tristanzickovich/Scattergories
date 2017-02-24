@@ -6,4 +6,8 @@
 		mysqli_query($db,"UPDATE activegames SET letterRolled='$letter' WHERE host='$host'");
 		exit();
 	}
+	else{
+		header("location:home.php");
+		exit();
+	}
 ?>
