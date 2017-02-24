@@ -21,7 +21,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="general.js"></script>
 	</head>
-	<body onload="setTime(<?php echo $gid; ?>); revealElement('timeLeft'); revealElement('currentList'); playersReady(<?php echo $gid ?>, <?php echo $currentRound ?>);">
+	<body onload="countDown(<?php echo $gid ?>); revealElement('timeLeft'); revealElement('currentList'); playersReady(<?php echo $gid ?>, <?php echo $currentRound ?>);">
 		<div id="timeLeft" class="hidden"></div>
 		<?php
 			print "Letter: " . $letter . "\n";

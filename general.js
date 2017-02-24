@@ -34,7 +34,7 @@ function setTime(curgid){
 		type: 'POST',
 		data: {gid : curgid},
 		success: function(){
-			countDown(curgid);
+			
 		}
 	})
 }
@@ -286,13 +286,14 @@ function validateLogin(){
 	    }
 	});
 }
+
 function startRound(gid){
 	$.ajax({
 	    type: 'POST',
 	    url: 'startRound.php',
 	    data: {gid : gid},
 	    success: function (data) {
-	    	
+	    	setTime(gid);
 	    }
 	});
 }
