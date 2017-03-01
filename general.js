@@ -315,14 +315,22 @@ function enterLobby(gid){
 
 function updateScore(round, player){
 	var score = document.getElementById('curRoundScore').value;
-	$.ajax({
-		url: 'setRoundScore.php',
-		type: 'POST',
-		data: {round : round, player : player, score : score},
-		success: function(){
-			hideElement("roundsScore");
-		}
-	})
+	var y = parseInt(score,10);
+	if( !isNaN(y) && score == y && score < 256 && score >= 0){
+		hideElement("scoremsg");
+		revealElement("nextRound");
+		$.ajax({
+			url: 'setRoundScore.php',
+			type: 'POST',
+			data: {round : round, player : player, score : score},
+			success: function(){
+				hideElement("roundsScore");
+			}
+		})
+	}
+	else{
+		revealElement("scoremsg");
+	}
 }
 
 function nextRound(round, gid){
