@@ -56,41 +56,32 @@ function playersReady(curgid, curround){
 	})
 }
 
-function rollDie(changes, reroll, host){
-	var element = document.getElementById("die");
-	var letter = String.fromCharCode(65 + (Math.floor((Math.random() * 26))));
-	--changes;
-	var rollRecurse = "rollDie(" + changes + ", " + reroll + ", '" + host + "')";
-	if(changes > 10){
-		element.innerHTML = letter;
-		var timer = setTimeout(rollRecurse, 100);
-	}
-	else if(changes > 4){
-		element.innerHTML = letter;
-		var timer = setTimeout(rollRecurse, 200);
-	}
-	else if(changes > 1){
-		element.innerHTML = letter;
-		var timer = setTimeout(rollRecurse, 300);
-	}
-	else if(changes > 0){
-		element.innerHTML = letter;
-		var timer = setTimeout(rollRecurse, 400);
-	}
-	else{
-		$.ajax({
-			url: 'setLetter.php',
-			type: 'POST',
-			data: {letter : letter, host : host},
-			success: function(data){
-				element.innerHTML = '<strong>'+ letter + '</strong>';
-				if(reroll == 0)
-					revealElement("reroll");
-				else
-					revealElement("enterLobby");
-			}
-		})
-	}
+function rollDie(host){
+	var numChanges = 15;
+	$.ajax({
+		url: 'setLetter.php',
+		type: 'POST',
+		data: {host : host, changes : numChanges},
+		success: function(reroll){
+			if(reroll < 2)
+				revealElement("reroll");
+			else
+				revealElement("enterLobby");
+		}
+	})
+}
+
+function displayDie(gid){
+	$.ajax({
+		url: 'getLetter.php',
+		type: 'GET',
+		data: {gid : gid},
+		success: function(data){
+			var loc = document.getElementById('die');
+			loc.innerHTML = JSON.parse(data).letter;
+			var timer = setTimeout(displayDie(gid), 50);
+		}
+	})
 }
 
 function hideElement(divID){

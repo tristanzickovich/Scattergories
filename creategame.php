@@ -9,10 +9,9 @@
 		$list2 = $_POST['list2'];
 		$list3 = $_POST['list3'];
 		$currentRound = 1;
-		$defaultLetter = 'A';
 		
-		mysqli_query($db,"INSERT INTO activegames (roundTime, list1, list2, list3, currentRound, letterRolled, host) 
-							VALUES ('$roundTime','$list1','$list2','$list3','$currentRound', '$defaultLetter', '$host')");
+		mysqli_query($db,"INSERT INTO activegames (roundTime, list1, list2, list3, currentRound, host) 
+							VALUES ('$roundTime','$list1','$list2','$list3','$currentRound', '$host')");
 		$query = mysqli_query($db, "SELECT gid FROM activegames WHERE host='$host'");
 		$gid = mysqli_fetch_array($query,MYSQLI_ASSOC)['gid'];
 		mysqli_query($db,"INSERT INTO gameplayers (gid, player) VALUES ('$gid','$player')");
