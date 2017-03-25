@@ -50,11 +50,10 @@
 		<div id="currentList">
 			<table id="listTable">
 				<tr>
-					<th> List <?php echo $curList; ?> </th>
+					<th colspan="3"> List <?php echo $curList; ?> </th>
 				</tr>
 				<tr>
-					<th></th>
-					<th>Item</th>
+					<th colspan="2">Item</th>
 					<th>Answer</th>
 				</tr>
 			<?php

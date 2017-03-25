@@ -12,20 +12,32 @@ function countDown(curgid){
 			else{
 				element.innerHTML = "Round Over";
 				revealElement("roundsScore");
-				roundsAnswers();
+				cacheAnswers();
 			}
 		}
 	})
 }
 
 function roundsAnswers(){
-	var answerSet = document.getElementsByClassName('roundAnswers');
 	for(var i = 11; i >= 0; --i){
-		var curitem = answerSet[i].value;
 		var curloc = "ans" + i;
+		var curitem = localStorage.getItem(curloc);
 		curloc = document.getElementById(curloc);
 		curloc.innerHTML = curitem;
 	}
+}
+
+function cacheAnswers(){
+	//check if already cached
+	if(localStorage.getItem("ans1") === null){
+		var answerSet = document.getElementsByClassName('roundAnswers');
+		for(var i = 11; i >= 0; --i){
+			var curitem = answerSet[i].value;
+			var curloc = "ans" + i;
+			localStorage.setItem(curloc, curitem);
+		}
+	}
+	roundsAnswers();
 }
 
 function setTime(curgid){
@@ -295,8 +307,10 @@ function enterLobby(gid){
 	    url: 'roundReady.php',
 	    data: {gid : gid},
 	    success: function (data) {
-	    	if(data > 0)
+	    	if(data > 0){
+	    		localStorage.clear();
 	    		window.location.href = "playgame.php?gid="+gid;
+	    	}
 	    	else{
 				var timer = setTimeout('enterLobby('+gid+') ', 300);
 			}
