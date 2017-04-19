@@ -4,23 +4,23 @@
 <html>
 	<head>
 		<title>Scattergories</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="general.js"></script>
+		<?php
+			include 'header.php';
+		?>
 	</head>
 	<body>
-		<a href="home.php">home</a> <br/>
-		<div id="setupOptions">
+		<button onclick='window.location.href="home.php";' class="btn btn-secondary">home</button><br/>
+		<div id="setupOptions" class="content-scope">
 			<form name="gamesettings">
 				How Long Per Round?:<br/>
-				<select id="roundTime">
-					<option value="12"> 2 mins </option>
+				<select id="roundTime" class="custom-select">
+					<option value="12" selected> 2 mins </option>
 					<option value="135"> 2 mins 15 secs </option>
 					<option value="150"> 2 mins 30 secs </option>
 					<option value="165"> 2 mins 45 secs </option>
 					<option value="180"> 3 mins </option>
 				</select>
-				<br/>Which Lists? (Select 3):
+				<br/><br/>Which Lists? (Select 3):
 				<table id="listCheckbox">
 					<tr>
 						<td><input type="checkbox" id="L1">1</input></td>
@@ -47,7 +47,8 @@
 						<td><input type="checkbox" id="L18">18</input></td>
 					</tr>
 				</table>
-				<input type="button" value="Create Game" onclick="validateSetup('<?php print $user; ?>');">
+				<br/>
+				<input type="button" class="btn btn-secondary" value="Create Game" onclick="validateSetup('<?php print $user; ?>');">
 			</form>
 		</div>
 	</body>

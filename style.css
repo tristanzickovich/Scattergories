@@ -38,6 +38,19 @@ body{
 #listTable{
 	margin: auto;
 }
+.listTable{
+	text-align: center;
+	margin: auto;
+	width: 70%;
+}
+#listCheckbox{
+	background-color: transparent;
+	margin: auto;
+	width: 50%;
+}
+#listCheckbox td{
+	padding: 5px;
+}
 .hidden{
 	display: none;
 }

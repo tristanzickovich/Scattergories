@@ -4,14 +4,25 @@
 <html>
 	<head>
 		<title>Scattergories</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="general.js"></script>
+		<?php
+			include 'header.php';
+		?>
 	</head>
 	<body>
-		<a href="home.php">home</a> <br/>
-		Enter username of game host: 
-		<input type="text" id="gamehost"></input>
-		<input type="button" value="Join Game" onclick="validateJoinGame();">
+		<button onclick='window.location.href="home.php";' class="btn btn-secondary">home</button><br/> 
+		<div class="content-scope">
+		Enter username of game host:
+		<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<div class="input-group">
+		    <input type="text" class="form-control" id="gamehost">
+		    <span class="input-group-btn">
+		      <button class="btn btn-secondary" type="button" onclick="validateJoinGame();">Join Game</button>
+		    </span>
+	    </div>
+	    </div>
+		</div>
+		</div>
 	</body>
 </html>
