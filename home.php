@@ -13,24 +13,26 @@
 <html>
 	<head>
 		<title>Scattergories</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="general.js"></script>
+		<?php
+			include 'header.php';
+		?>
 	</head>
 	<body>
-		<h1 id="mainlogo">Scattergories</h1>
-		<?php print $player; ?>
-		<a href='logout.php'>logout</a><br/>
+		<ul class="nav justify-content-center">
+		<li class="navbar-brand">Scattergories</div>
 		<?php 
 		if($hasActiveGame)
-			print '<a href="waitLobby.php?gid='.$activegid.'">Return To Game In Progress</a>';
+			print '<li><a class="nav-link" href="waitLobby.php?gid='.$activegid.'">Return To Game In Progress</a></li>';
 		else{
 		?>
-			<a href='viewlists.php'>View Lists</a>
-			<a href='setupgame.php'>Setup Game</a>
-			<a href='joinGame.php'>Join Game</a>
+			<li><a class="nav-link" href='viewlists.php'>View Lists</a></li>
+			<li><a class="nav-link" href='setupgame.php'>Setup Game</a></li>
+			<li><a class="nav-link" href='joinGame.php'>Join Game</a></li>
 		<?php
 		}
 		?>
+		<li class="navbar"><?php print $player; ?></li>
+		<li><a class="nav-link" href='logout.php'>logout</a><br/></li>
+		</ul>
 	</body>
 </html>

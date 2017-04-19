@@ -7,15 +7,18 @@
 <html>
 	<head>
 		<title>Scattergories</title>
-		<link rel="stylesheet" type="text/css" href="./style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="general.js"></script>
+		<?php
+			include 'header.php';
+		?>
 	</head>
 	<body>
-		<a href="home.php">home</a> <br/>
+		<button onclick='window.location.href="home.php";' class="btn btn-secondary">home</button> <br/>
+		<div class="content-scope">
 		<h1>Game Over</h1>
-		<div>
-			<table>
+		<div class="row">
+			<div class="col-sm">
+			<table class="table table-hover">
+				<thead class="table-inverse">
 				<tr>
 					<th>player</th>
 					<th>round 1</th>
@@ -23,6 +26,7 @@
 					<th>round 3</th>
 					<th>total</th>
 				</tr>
+				</thead>
 			<?php
 				$curplayer="tmp"; $score1=0; $score2=0; $score3=0; $scoreTotal=0; 
 				$winner=""; $winnerScore=0;
@@ -40,7 +44,7 @@
 							<td>'.$score1.'</td>
 							<td>'.$score2.'</td>
 							<td>'.$score3.'</td>
-							<td>'.$scoreTotal.'</td>
+							<td class="table-danger"><strong>'.$scoreTotal.'</strong></td>
 						</tr>';
 						if($scoreTotal > $winnerScore){
 							$winnerScore = $scoreTotal;
@@ -53,9 +57,13 @@
 				}
 			?>
 			</table>
+			</div>
+		</div>
+		<div class="row col-sm">
 			<?php
 				echo "Winner(s)! : " . $winner;
 			?>
+		</div>
 		</div>
 	</body>
 </html>
