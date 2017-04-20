@@ -6,7 +6,7 @@ function countDown(curgid){
 		data: {gid : curgid},
 		success: function(secs){
 			var element = document.getElementById("timeLeft");
-			element.innerHTML = "time remaining: " + secs + " seconds";
+			element.innerHTML = "Timer: " + secs;
 			if(secs > 0)
 				var timer = setTimeout('countDown('+curgid+') ', 300);
 			else{

@@ -23,73 +23,94 @@
 		$gpdata = mysqli_fetch_array($query,MYSQLI_ASSOC);
 		$pScoreSent = ($gpdata['roundReady'] > 0 ? true : false);
 
+		//grab list items
+		define('myConst', TRUE); //for printlist verification
+		include 'printlist.php';
+		$curList = 0;
+		if($currentRound == 1)
+			$curList = $list1;
+		else if($currentRound == 2)
+			$curList = $list2;
+		else if($currentRound == 3)
+			$curList = $list3;
+		$listitems = retrieveList($curList);
 ?>
 <html>
 	<head>
 		<title>Scattergories</title>
-		<link rel="stylesheet" type="text/css" href="./style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="general.js"></script>
+		<?php
+			include 'header.php';
+		?>
 	</head>
 	<body onload="countDown(<?php echo $gid ?>); playersReady(<?php echo $gid; ?>, <?php echo $currentRound; ?>);">
-		<div id="timeLeft"></div>
-		<?php
-			define('myConst', TRUE); //for printlist verification
-			print "Letter: " . $letter . "\n";
-			include 'printlist.php';
-			$curList = 0;
-			if($currentRound == 1)
-				$curList = $list1;
-			else if($currentRound == 2)
-				$curList = $list2;
-			else if($currentRound == 3)
-				$curList = $list3;
-			$listitems = retrieveList($curList);
-		?>
-		
-		<div id="currentList">
-			<table id="listTable">
+		<div class="content-scope">
+		<div class="row">
+			<div class="col-md-6">
+				<div id="timeLeft" class="rounded"></div>
+			</div>
+			<div class="col-md-3" style="display: flex; align-items: center;">
+				<h4> List #<?php echo $curList; ?></h4>
+			</div>
+			<div class="col-md-3" style="display: flex; align-items: center;">
+				<h4>
+				<?php
+					print "Letter: " . $letter . "\n";
+				?>
+				</h4>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+		<div id="currentList" class="rounded">
+			<table id="listTable" class="table">
+			 <thead class="thead-inverse">
 				<tr>
-					<th colspan="3"> List <?php echo $curList; ?> </th>
-				</tr>
-				<tr>
-					<th colspan="2">Item</th>
+					<th></th>
+					<th>Item</th>
 					<th>Answer</th>
 				</tr>
+			</thead>
 			<?php
 				for($i = 0; $i < 12; ++$i){
 					Print '<tr>';
 					Print '<td>' . ($i + 1) . '. </td>';
 					Print '<td>' . $listitems[$i] . '</td>';
-					Print '<td id="ans'.$i.'"><input type="text" class="roundAnswers"></td>';
+					Print '<td id="ans'.$i.'"><input type="text" class="roundAnswers form-control form-control-sm"></td>';
 					Print '<tr>';
 				}
 			?>
 			</table>
 		</div>
-		<div id="roundsScore" class="hidden">
+		</div>
+		<hr>
+		<div class="row justify-content-center">
+			<div id="roundsScore" class="hidden">
+				<?php
+				if(!$pScoreSent){
+				?>
+				<input type="text" class"form-control form-control-sm" id="curRoundScore">
+				<input type="button" class="btn btn-primary" value="Send Score" onclick="updateScore(<?php echo $currentRound; ?>, '<?php echo $player; ?>');">
+				<?php
+				}
+				?>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div id="scoremsg" class="hidden">
+				Please enter an integer, between 0 and 255.
+			</div>
+			<div id="nextRound" class="hidden">
+				<p>Waiting for all players to submit their scores</p>
+			</div>
 			<?php
-			if(!$pScoreSent){
+			if($pScoreSent){
 			?>
-			<input type="text" id="curRoundScore">
-			<input type="button" value="Send Score" onclick="updateScore(<?php echo $currentRound; ?>, '<?php echo $player; ?>');">
+				<script>revealElement("nextRound");</script>
 			<?php
 			}
+			} //closing brace for "GET" check
 			?>
+			</div>
 		</div>
-		<div id="scoremsg" class="hidden">
-			Please enter an integer, between 0 and 255.
-		</div>
-		<div id="nextRound" class="hidden">
-			<p>Waiting for all players to submit their scores</p>
-		</div>
-		<?php
-		if($pScoreSent){
-		?>
-			<script>revealElement("nextRound");</script>
-		<?php
-		}
-		} //closing brace for "GET" check
-		?>
 	</body>
 </html>
