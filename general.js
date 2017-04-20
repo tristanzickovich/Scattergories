@@ -114,7 +114,7 @@ function lobbyPlayers(gid){
 		success: function(list){
 			people = JSON.parse(list);
 			var element = document.getElementById("lobbyPlayers");
-			element.innerHTML = "Players in Lobby: <br/>";
+			element.innerHTML = "<strong>Players in Lobby</strong> <br/><hr/>";
 			for(var i = 0; i < people.length; ++i){
 				element.innerHTML += (people[i] + "<br/>");
 			}

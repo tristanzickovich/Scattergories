@@ -18,26 +18,33 @@
 <html>
 	<head>
 		<title>Scattergories</title>
-		<link rel="stylesheet" type="text/css" href="./style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="general.js"></script>
+		<?php
+			include 'header.php';
+		?>
 	</head>
 	<body onload="lobbyPlayers(<?php echo $gid; ?>); enterLobby(<?php echo $gid; ?>); displayDie(<?php echo $gid; ?>);">
-		<h1>Lobby</h1>
-		<div id="lobbyPlayers"></div>
-		<div id="die">?</div>
+		<div class="content-scope">
+		<div class="row justify-content-md-center">
+			<h1>Lobby</h1>
+		</div>
+		<hr/>
+		<br/>
+		<div class="row justify-content-md-center">
+		<div class="col-sm-4">
+			<div id="die">?</div>
+			<br/>
 		<?php
 		if($host == $player){
 			if($reroll < 2){
 				if($reroll < 1){
 		?>
 					<div id="rollButton">
-						<button onclick=" hideElement('rollButton'); rollDie('<?php print $host; ?>');">ROLL DIE</button>
+						<button class="btn btn-secondary btn-sm" onclick=" hideElement('rollButton'); rollDie('<?php print $host; ?>');">ROLL DIE</button>
 					</div>
 					<div id="reroll" class="hidden">
 						Reroll?<br/>
-						<button onClick="hideElement('reroll'); rollDie('<?php print $host; ?>');">Yes</button>
-						<button onClick="hideElement('reroll'); revealElement('enterLobby')">No</button>
+						<button class="btn btn-secondary btn-sm" onClick="hideElement('reroll'); rollDie('<?php print $host; ?>');">Yes</button>
+						<button class="btn btn-secondary btn-sm" onClick="hideElement('reroll'); revealElement('enterLobby')">No</button>
 					</div>
 			<?php
 				}
@@ -45,8 +52,8 @@
 			?>
 				<div id="reroll">
 					Reroll?<br/>
-					<button onClick="hideElement('reroll'); rollDie('<?php print $host; ?>');">Yes</button>
-					<button onClick="hideElement('reroll'); revealElement('enterLobby')">No</button>
+					<button class="btn btn-secondary btn-sm" onClick="hideElement('reroll'); rollDie('<?php print $host; ?>');">Yes</button>
+					<button class="btn btn-secondary btn-sm" onClick="hideElement('reroll'); revealElement('enterLobby')">No</button>
 				</div>
 		<?php
 				}
@@ -54,16 +61,22 @@
 			else{
 		?>
 			<div id="enterLobby">
-				<button onClick="startRound('<?php print $gid; ?>')">Start Game!</button>
+				<button class="btn btn-primary btn-sm" onClick="startRound('<?php print $gid; ?>')">Start Game!</button>
 			</div>
 		<?php
 			}
 		?>
 		<div id="enterLobby" class="hidden">
-			<button onClick="startRound('<?php print $gid; ?>')">Start Game!</button>
+			<button class="btn btn-primary btn-sm" onClick="startRound('<?php print $gid; ?>')">Start Game!</button>
 		</div>
 		<?php
 		}
 		?>
+		</div>
+		<div class="col-sm-8">
+			<div id="lobbyPlayers"></div>
+		</div>
+		</div>
+		</div>
 	</body>
 </html>
