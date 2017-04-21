@@ -6,8 +6,9 @@ body{
 	background-color: rgba(250, 250, 250, 0.8);
 	margin:auto;
 	margin-top:10px;
-	width: 70%;
+	width: 85%;
 	max-width: 900px;
+	min-width: 650px;
 	text-align: center;
 	padding: 15px;
 	border-radius: 10px;
