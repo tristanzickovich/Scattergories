@@ -13,9 +13,18 @@ function countDown(curgid){
 				element.innerHTML = "Round Over";
 				revealElement("roundsScore");
 				cacheAnswers();
+				revealRowScoring();
 			}
 		}
 	})
+}
+
+function revealRowScoring(){
+	var x = document.getElementsByClassName("rscore");
+	var i;
+	for(i = (x.length - 1); i >= 0; --i){
+		x[i].className = "revealed";
+	}
 }
 
 function roundsAnswers(){
@@ -352,4 +361,14 @@ function nextRound(round, gid){
 			}
 		}
 	})
+}
+
+function addUpScore(){
+	var x = document.getElementsByClassName("rowScore");
+	var score = 0;
+	var i;
+	for(i = 0; i < x.length; ++i){
+		score += parseInt(x[i].value);
+	}
+	document.getElementById("curRoundScore").value = score;
 }

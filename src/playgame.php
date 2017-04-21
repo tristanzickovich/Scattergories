@@ -68,6 +68,7 @@
 					<th></th>
 					<th>Item</th>
 					<th>Answer</th>
+					<th class="hidden rscore">Score</th>
 				</tr>
 			</thead>
 			<?php
@@ -76,6 +77,7 @@
 					Print '<td>' . ($i + 1) . '. </td>';
 					Print '<td>' . $listitems[$i] . '</td>';
 					Print '<td id="ans'.$i.'"><input type="text" class="roundAnswers form-control form-control-sm"></td>';
+					Print '<td class="hidden rscore"><input type="number" min="0" max="10" value="0" class="rowScore form-control form-control-sm" style="width:52px;"></td>';
 					Print '<tr>';
 				}
 			?>
@@ -88,8 +90,13 @@
 				<?php
 				if(!$pScoreSent){
 				?>
-				<input type="text" class"form-control form-control-sm" id="curRoundScore">
-				<input type="button" class="btn btn-primary" value="Send Score" onclick="updateScore(<?php echo $currentRound; ?>, '<?php echo $player; ?>');">
+				<div class="input-group">
+					<button class="input-group-addon" onclick="addUpScore()">
+						<span class="octicon octicon-sync"></span>
+					</button>
+					<input type="text" class"form-control form-control-sm" id="curRoundScore">
+					<input type="button" class="form-control btn btn-primary" value="Send Score" onclick="updateScore(<?php echo $currentRound; ?>, '<?php echo $player; ?>');">
+				</div>
 				<?php
 				}
 				?>
