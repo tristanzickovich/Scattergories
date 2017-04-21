@@ -1,0 +1,67 @@
+body{
+	background-color: #e22f2f;
+}
+.content-scope{
+	background-color: white;
+	background-color: rgba(250, 250, 250, 0.8);
+	margin:auto;
+	margin-top:10px;
+	width: 70%;
+	max-width: 900px;
+	text-align: center;
+	padding: 15px;
+	border-radius: 10px;
+}
+#mainlogo{
+	font-family: sans-serif;
+}
+#die{
+	font-size: 35px;
+	border: 5px solid black;
+	width: 75px;
+	height: 75px;
+	padding: 5px;
+	margin: auto;
+	background-color: white;
+	text-align: center;
+	border-radius: 5px;
+}
+#currentList{
+	background-color: white;
+	width: 500px;
+	margin: auto;
+	border: 3px solid black;
+	border-top: none;
+}
+#timeLeft{
+	width: 210px;
+	height: 60px;
+	border: 3px solid black;
+	background-color: white;
+	margin: auto;
+	font-size: 2em;
+	text-align: center;
+	padding:4px;
+}
+#listTable{
+	margin: auto;
+}
+.listTable{
+	text-align: center;
+	margin: auto;
+	width: 70%;
+}
+#listCheckbox{
+	background-color: transparent;
+	margin: auto;
+	width: 50%;
+}
+#listCheckbox td{
+	padding: 5px;
+}
+.hidden{
+	display: none;
+}
+table{
+	background-color: white;
+}
