@@ -78,7 +78,7 @@
 					Print '<td>' . $listitems[$i] . '</td>';
 					Print '<td id="ans'.$i.'"><input type="text" class="roundAnswers form-control form-control-sm"></td>';
 					Print '<td class="hidden rscore"><input type="number" min="0" max="10" value="0" class="rowScore form-control form-control-sm" style="width:52px;"></td>';
-					Print '<tr>';
+					Print '</tr>';
 				}
 			?>
 			</table>

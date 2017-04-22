@@ -83,9 +83,12 @@
 				<li>If more than one player submitted the same answer, no points are awarded for that entry</li>
 				<li>The group collectively decides if each answer is appropriate</li>
 				<li>Approved answers are awarded points</li>
-				<li>For each word in the answer beginning with the letter for the round, 1 point is awarded.
-					For Example. If the round letter is 'J', "Jogging" is awared 1 point, "Jumping Jacks" is awarded 2 points, etc.</li>
-				<li>Keep track of your scores during scoring and submit your total score at the end of each round</li>
+				<li>For each word in the answer beginning with the letter for the round, 1 point is awarded
+					<br/>For Example. If the round letter is 'J', "Jogging" is awared 1 point, "Jumping Jacks" is awarded 2 points, etc.</li>
+				<li>Enter your score for each item in it's corresponding score box</li>
+				<li>Click the <span class="octicon octicon-sync"></span> icon at the bottom of the page
+					to add up your scores from each row</li>
+				<li>Click the send score button to store the round's score in the server</li>
 			</ul>
 		</div>
 		</div>

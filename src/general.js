@@ -372,3 +372,28 @@ function addUpScore(){
 	}
 	document.getElementById("curRoundScore").value = score;
 }
+
+function updateListModal(listnum){
+	var label = document.getElementById("listModalLabel");
+	var body = document.getElementById("listModalBody");
+	
+	$.ajax({
+		url: 'listModal.php',
+		type: 'GET',
+		data: {listnum : listnum},
+		success: function(data){
+			items = JSON.parse(data);
+			label.innerHTML = "List " + listnum;
+			var newbody = "<table id='listTable' class='table'>";
+			newbody += "<thead class='thead-inverse'>";
+			newbody += "<tr> <th></th> <th>Item</th> </tr>";
+			newbody += "</thead>";
+			for(var i = 0; i < 12; ++i){
+				newbody += '<tr> <td>' + (i + 1) + '. </td> <td>' + items[i] + '</td> </tr>';
+			}
+			newbody += "</table>";
+			
+			body.innerHTML = newbody;
+		}
+	})
+}
