@@ -12,7 +12,7 @@
 ?>
 <html>
 	<head>
-		<title>Scattergories</title>
+		<title>Scattergories 2.0</title>
 		<?php
 			include 'header.php';
 		?>
